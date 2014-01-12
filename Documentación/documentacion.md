@@ -45,14 +45,14 @@ en la web de azure.
 
 ![captura1](https://dl.dropboxusercontent.com/u/17453375/ubuntu-server-12-04.png)
 
-![captura2](https://dl.dropboxusercontent.com/u/17453375/ubuntu-server-12-04(2).png)
+![captura2](https://dl.dropboxusercontent.com/u/17453375/ubuntu-server-12-04-2.png)
 
-![captura3](https://dl.dropboxusercontent.com/u/17453375/ubuntu-server-12-04(3).png)
+![captura3](https://dl.dropboxusercontent.com/u/17453375/ubuntu-server-12-04-3.png)
 
 
 Ahora ya podemos acceder a la maquina virtual con ssh.
 
-  ssh jaime@iv-ubuntu-1204.cloudapp.net
+    ssh jaime@iv-ubuntu-1204.cloudapp.net 
 
 ![captura5](https://dl.dropboxusercontent.com/u/17453375/ssh-azure-ubuntu1204.png)
 
@@ -60,21 +60,21 @@ Una vez dentro necesitamos instalar una serie de paquetes para que la aplicació
 mencionada mas arriba funcione, entre ellas python-dev o build-essential además de
 las bibliotecas necesarias de python como web.py o mako.
 
-  sudo apt-get install python-dev
-  sudo apt-get install build-essential
-  sudo apt-get install git
-  sudo apt-get install python-pip
-  sudo pip install web.py
-  sudo pip install mako
-  sudo pip install pymongo
-  sudo pip install tweepy
-  sudo pip install feedparser
+    sudo apt-get install python-dev
+    sudo apt-get install build-essential
+    sudo apt-get install git
+    sudo apt-get install python-pip
+    sudo pip install web.py
+    sudo pip install mako
+    sudo pip install pymongo
+    sudo pip install tweepy
+    sudo pip install feedparser
 
 Ahora solo nos queda descargar la base de datos mongoDB para tener la maquina preparada.
 Podemos hacer usando ftp o descargandolo directamente en la maquina virtual.
 
-  sftp iv-ubuntu-1204.cloudapp.net
-  put mongodb.tar.gz
+    sftp iv-ubuntu-1204.cloudapp.net
+    put mongodb.tar.gz
 
 Tras unos minutos tendremos la base de datos en la maquina virtual ya solo nos quedará
 descargar la aplicacion que esta en un repositorio de github, y lanzar tanto la base
@@ -84,24 +84,24 @@ nota: Se puede añadir un puerto para que vaya la aplicacion a traves del 8080 o
 en web.py el puerto por defecto.
 
 
-![captura4](https://dl.dropboxusercontent.com/u/17453375/ubuntu-server-12-04(4).png)
+![captura4](https://dl.dropboxusercontent.com/u/17453375/ubuntu-server-12-04-4.png)
 
-Para que la aplicación funcione aunque cerremos la conexion ssh podemos usar nohup.
+Para que la aplicación funcione aunque cerremos la conexion ssh, podemos usar nohup.
 
 ### CentOS
 
-El proceso es exactamente el mismo para centos, seguinmos los pasos que antes salvo
-que usamos yum y lo usamos para los paquetes de desarrollo.
+El proceso es exactamente el mismo para centos, seguimos los mismos pasos que antes 
+salvo que usamos yum y lo usamos para los paquetes de desarrollo.
 
-  sudo yum update
-  sudo yum groupinstall -y "Development tools"
-  sudo yum install gcc python-devel
+    sudo yum update
+    sudo yum groupinstall -y "Development tools"
+    sudo yum install gcc python-devel
 
 Despues de instalar los paquetes de python y git, podemos descargar la aplicacion,
 y pasar por sftp la base de datos mongodb.
 
-  sftp jaime@iv-centos.cloudapp.net
-  put mongodb.tar.gz
+    sftp jaime@iv-centos.cloudapp.net
+    put mongodb.tar.gz
 
 Lanzamos la base de datos y la aplicacion igual que antes y probamos a acceder desde
 el navegador.(La direccion web la obtenemos de la pagina de azure)
@@ -113,9 +113,9 @@ el navegador.(La direccion web la obtenemos de la pagina de azure)
 ## Benchmarks
 
 Hemos cogido para ambas configuraciones los menores recursos posibles que permite azure
-ya que si queremos hacer un uso real, esta aplicacion web no necesita muxos recursos ni
+ya que si queremos hacer un uso real, esta aplicacion web no necesita muchos recursos ni
 va a tener gran cantidad de visitas, además de esta forma podríamos usar mejor los recursos
-permitiendo con tener muchas maquinas virtuales en una sola maquina real (Usando nuestro PC
+permitiendo contener mas maquinas virtuales en una sola maquina real (Usando nuestro PC
 por ejemplo)
 
 Simplemente haciendo una rapida busqueda por internet podemos encontrar varios benchmarks para
@@ -129,23 +129,30 @@ medir los tiempos de respuesta. Tal y como se hizo en un ejercicio de temas ante
 el siguiente comando para realizar 1000 peticiones con 100 de concurrencia. La pagina que vamos
 a pedir no es la principal, si no la de contacto en la que encontramos el servicio de google maps
 
+![captura7](https://dl.dropboxusercontent.com/u/17453375/cafe-maps.png)
 
 
-  ab -n 1000 -c 100 -g ubuntu-12-04.txt http://iv-ubuntu-1204.cloudapp.net:8080/cafe/contacto
-  ab -n 1000 -c 100 -g centOS.txt http://iv-centos.cloudapp.net:8080/cafe/contacto
+
+    ab -n 1000 -c 100 -g ubuntu-12-04.txt http://iv-ubuntu-1204.cloudapp.net:8080/cafe/contacto
+    ab -n 1000 -c 100 -g centOS.txt http://iv-centos.cloudapp.net:8080/cafe/contacto
 
 Con la opcion -g guardamos los resultados en un archivo para ahora generar las graficas con
 gnu-plot
 
-  gnuplot -e 'set terminal png; set output "centOS-grafica.png"; set xlabel "Petición"; 
-  set ylabel "ms"; plot "centOS.txt" using 10 with lines title "Tiempo de respuesta"'
+    gnuplot -e 'set terminal png; set output "centOS-grafica.png"; set xlabel "Petición"; 
+    set ylabel "ms"; plot "centOS.txt" using 10 with lines title "Tiempo de respuesta"'
 
-  gnuplot -e 'set terminal png; set output "ubuntu-12-04.txt.png"; set xlabel "Petición"; set ylabel "ms"; plot "ubuntu-12-04.txt" using 10 with lines title "Tiempo de respuesta"'
+
+    gnuplot -e 'set terminal png; set output "ubuntu-12-04.txt.png"; set xlabel "Petición"; 
+    set ylabel "ms"; plot "ubuntu-12-04.txt" using 10 with lines title "Tiempo de respuesta"'
 
 CentOS
+
 ![captura7](https://dl.dropboxusercontent.com/u/17453375/centOS-grafica.png)
 
+
 Ubuntu server
+
 ![captura8](https://dl.dropboxusercontent.com/u/17453375/ubuntu-12-04-grafica.png)
 
 
@@ -154,8 +161,8 @@ Ubuntu server
 Ahora vamos a usar httperf y vamos a intentar estresar un poco mas el servidor mandando
 mas peticiones por segundo y mas peticiones en total.
 
-  httperf --server 137.117.146.50 --port 8080 --uri /cafe/contacto/ --rate 300 --num-conn 30000 --num-call 1 --timeout 5
-  httperf --server 137.117.146.80 --port 8080 --uri /cafe/contacto/ --rate 300 --num-conn 30000 --num-call 1 --timeout 5
+    httperf --server 137.117.146.50 --port 8080 --uri /cafe/contacto/ --rate 300 --num-conn 30000 --num-call 1 --timeout 5
+    httperf --server 137.117.146.80 --port 8080 --uri /cafe/contacto/ --rate 300 --num-conn 30000 --num-call 1 --timeout 5
 
 | Maquina Virtual | Tiempo de respuesta (ms) |
 | --------------- | ------------------------ |
