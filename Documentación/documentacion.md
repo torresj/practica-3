@@ -185,7 +185,7 @@ ni por el propio servicio de azure.
 En cuanto a la aplicación, no comento nada ya que tampoco es objetivo de esta practica, 
 aunque ambas maquinas estan ejecutandose y pueden ser probadas por cualquier persona en:
 
-* [centOS](http://iv-centos.cloudapp.net:8080/cafe centOS)
+* [centOS](http://iv-centos.cloudapp.net:8080/cafe)
 
-* [Ubuntu server 12.04](http://iv-ubuntu-1204.cloudapp.net:8080/cafe ubuntu)
+* [Ubuntu server 12.04](http://iv-ubuntu-1204.cloudapp.net:8080/cafe)
 
