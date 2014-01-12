@@ -1,0 +1,313 @@
+/*
+Credit: http://www.templatemo.com
+*/
+
+body {
+	margin: 0px;
+	padding: 0px;
+	color: #252525;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 13px;
+	line-height: 1.7em; 
+	background-image: url(/static/images/templatemo_body.jpg);
+	background-color: #002e33;
+	background-position: top;
+	background-repeat: repeat-x
+}
+
+#boton_twiter{
+	float:right;
+	margin: 20px;
+}
+
+a, a:link, a:visited { color: #990000; font-weight: bold; text-decoration: none; }
+a:hover { color: #000000; text-decoration: underline; }
+
+p { margin: 0 0 10px 0; padding: 0; }
+img { border: none; }
+em { color: #990000; font-style: normal }
+
+h1, h2, h3, h4, h5, h6 { color: #000; font-weight: normal; }
+h1 { font-size: 28px; margin: 0 0 30px 0; padding: 5px 0 }
+h2 { font-size: 25px; margin: 0 0 20px 0; padding: 5px 0; }
+h3 { font-size: 22px; margin: 0 0 15px; padding: 0; }
+h4 { font-size: 18px; margin: 0 0 15px; padding: 0; }
+h5 { font-size: 16px; margin: 0 0 10px; padding: 0;  }
+h6 { font-size: 14px; margin: 0 0 5px; padding: 0; }
+
+.cleaner { clear: both }
+.h10 { height: 10px }
+.h20 { height: 20px }
+.h30 { height: 30px }
+.h40 { height: 40px }
+.h50 { height: 50px }
+.h60 { height: 60px }
+
+a.button { display: block; width: 103px; height: 30px; text-align: right; padding: 6px 20px 0 0; color: #afafaf; font-weight: normal; background: url(/static/images/templatemo_button.jpg) }
+a.button:hover { text-decoration: none; color: #fff; }
+
+.float_l { float: left }
+.float_r { float: right }
+
+.image_wrapper { display: inline-block; border: 5px solid #fff; background: none; margin-bottom: 5px }
+.image_fl { float: left; margin: 3px 15px 0 0 }
+.image_fr { float: right; margin: 3px 0 0 15px }
+
+
+.tmo_list { margin: 0 0 0 30px; padding: 0; list-style: none }
+.tmo_list li { color:#000; margin: 0; padding: 0 0 0 50px; background: url(/static/images/templatemo_list.jpg) no-repeat scroll 0 4px  }
+.tmo_list li a { color: #000; font-weight: normal }
+.tmo_list li a:hover { color: #000 }
+
+#templatemo_wrapper {
+	width: 1024px;
+	margin: 0 auto
+}
+
+#templatemo_header {
+	width: 1024px;
+	height: 154px;
+}
+
+#site_title { float: left; display: block; width: 483px; height: 123px }
+#site_title h1 {
+	width: 550px;
+	height: 80px;
+	margin-top:20px;
+	padding-top: 30px;
+	color:#FAAC58;
+	text-align: center;
+	font: 4em "Londrina Shadow" Arial sans-serif;
+	text-shadow: 0px -1px 0px #333333
+}
+
+#templatemo_menu {
+	float: right;
+	margin-top: 99px;
+}
+
+#templatemo_menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#templatemo_menu ul li {
+	padding: 0;
+	margin: 0;
+	display: inline;
+}
+
+#templatemo_menu ul li a {
+	float: left;
+	display: block;
+	width: 118px;
+	height: 40px;
+	font-size: 15px;
+	padding: 15px 0 0 0;
+	color: #ccc;	
+	text-align: center;
+	text-decoration: none;
+	font-weight: 400;
+	outline: none;
+	border: none;
+}
+
+#templatemo_menu ul li a:hover, #templatemo_menu ul .current {
+	color: #000;
+	background: url(/static/images/templatemo_menu_hover.png) no-repeat
+}
+
+#templatemo_middle {
+	width: 884px;
+	height: 132px;
+	padding: 35px 70px;
+	background: url(/static/images/templatemo_image_04.png) no-repeat
+}
+
+#middle_box { float: right; width: 350px; height: 95px; padding: 20px 0px 20px 10px ; background: url(/static/images/templatemo_box.png) no-repeat }
+#middle_box h2 { font-size: 18px; margin-bottom: 10px; padding: 0 0 5px }
+
+#saludo{
+	float:left;
+	margin-left:50px;
+	margin-top: 35px;
+	font-size: 1.5em;
+}
+
+#cerrar{
+	float:left;
+	margin-top:-13%;
+	margin-left:90%;
+
+}
+
+form{float:left;padding-left: 25px}
+
+#Login { 
+	cursor:pointer; 
+	color:black; 
+	text-shadow:1px 1px 0 #aaeaf7; 
+	border:thin solid grey; 
+	border-radius:3px; 
+	-moz-border-radius:3px; 
+	-webkit-border-radius:3px; 
+	font-size:1em; 
+	padding:2% 8%; 
+	margin:6% 2% 5% 20%;
+	font-weight:bold; 
+}
+
+#boton_act,#boton_bor{ /* clase general */
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  color: #555;
+  display: inline-block;
+  font: bold 14px/14px HelveticaNeue, Arial;
+  padding: 8px 11px;
+  text-decoration: none;
+  background: #f5f5f5;
+  border-color: #dedede #d8d8d8 #d3d3d3;
+  box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+  color: #555;
+  text-shadow: 0 1px 0 #fff;
+  background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0);
+  background: -webkit-linear-gradient(top,  #f9f9f9, #f0f0f0);
+  background: o-linear-gradient(top,  #f9f9f9, #f0f0f0);
+  background: ms-linear-gradient(top,  #f9f9f9, #f0f0f0);
+  background: linear-gradient(top,  #f9f9f9, #f0f0f0);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f0f0f0');
+}
+
+#boton_act:hover,#boton_bor:hover{
+    background: #f4f4f4;
+    border-color: #c7c7c7 #c3c3c3 #bebebe;
+    box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+    text-shadow: 0 1px 0 #fdfdfd;
+    background: -moz-linear-gradient(top,  #efefef, #f8f8f8);
+    background: -webkit-linear-gradient(top,  #efefef, #f8f8f8);
+    background: -o-linear-gradient(top,  #efefef, #f8f8f8);
+    background: -ms-linear-gradient(top,  #efefef, #f8f8f8);
+    background: linear-gradient(top,  #efefef, #f8f8f8);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#f8f8f8');
+}
+
+#Login:hover{ 
+	background:#FAAC58; 
+}
+
+#regis{
+	float:left;
+	clear: left;
+	margin-top:-20px;
+}
+
+#error{
+	color:red;
+}
+
+.wrong{
+
+	color:#DF0101;
+
+}
+
+#datos{
+	float:left;
+	width: 500px;
+	font-size: 1.5em;
+}
+
+#datos em{
+	float:left;
+	margin-right: 5%;
+}
+
+#datos td{
+	height: 30px;
+}
+
+#botones,#botones2{
+	float:left;
+	padding-top: 50px;
+	padding-right: 30px;
+}
+
+#registrado{
+	float:left;
+	color:#DF0101;
+	font-size: 2em;
+	margin-top:10%;
+	margin-bottom: 10%;
+}
+
+#tmeplatemo_main {
+	width: 944px;
+	padding: 40px;
+	background: url(/static/images/templatemo_content.jpg) repeat-y
+}
+
+#templatemo_sidebar { float: left; width: 308px; }
+
+.templatemo_sb_box { position: relative; width: 268px; padding: 20px; margin-bottom: 20px; background: url(/static/images/templatemo_sb_middle.jpg) repeat-y }
+.templatemo_sb_box span.top { position: absolute; width: 308px; height: 10px; left: 0; top: 0; background: url(/static/images/templatemo_sb_top.jpg) }
+.templatemo_sb_box span.bottom { position: absolute; width: 308px; height: 10px; left: 0; bottom: 0; background: url(/static/images/templatemo_sb_bottom.jpg) }
+
+.news_box { position: relative; width: 238px; padding: 15px; margin-bottom: 15px; background: url(/static/images/templatemo_sbb_middle.jpg) repeat-y }
+.news_box span.nb_top { position: absolute; width: 268px; height: 10px; left: 0; top: 0; background: url(/static/images/templatemo_sbb_top.jpg) }
+.news_box span.nb_bottom { position: absolute; width: 268px; height: 10px; left: 0; bottom: 0; background: url(/static/images/templatemo_sbb_bottom.jpg) }
+
+.news_box h6 { margin-bottom: 0 }
+.news_box h6 a{ color: #000; font-size: 13px; }
+
+#promotion a { display: block; width: 268px; height: 88px; padding: 140px 20px 0 20px; background: url(/static/images/templatemo_spotm.png) no-repeat; line-height: 18px; text-decoration: none; color: #000; font-weight: 400 }
+#promotion span { display: block; color: #fff; font-size: 14px }
+
+#templatemo_content { float: right; width: 600px }
+.content_box { padding-bottom: 30px; margin-bottom: 20px; background: url(/static/images/templatemo_hr_divider.jpg) center bottom no-repeat }
+.content_box_last { padding-bottom: 0; margin-bottom: 0; background: none }
+
+#templatemo_content h2 { padding: 10px 0 10px 55px; background: url(/static/images/templatemo_h2.jpg) no-repeat left center }
+
+.gallery { clear: both; margin: 0; padding: 0; list-style: none }
+.gallery li { margin: 0; padding: 0; display: inline } 
+.gallery li a { display: block; float: left; width: 179px; margin: 0 10px 10px 0; background: #fff; padding: 5px; color: #000; font-size: 12px; font-weight: normal; text-align: right }
+.gallery li a:hover { text-decoration: none }
+.gallery li a img { margin-bottom: 5px; }
+
+#RSSimg {
+	padding-left: 7px;
+}
+
+#RSS a{
+	color:black;
+}
+
+#tabla{
+	margin: 20px;
+}
+
+.chart {
+
+	margin:50px;
+}
+
+#templatemo_footer {
+	width: 1024px;
+	height: 108px;
+	padding: 10px 0;
+	text-align: center;
+	color: #000;
+	background: url(/static/images/templatemo_footer.jpg) no-repeat
+}
+
+#templatemo_footer a {
+	font-weight: normal;
+	color: #000;
+	text-decoration: underline;
+}
+
+#templatemo_footer a:hover {
+	color: #990000;
+	text-decoration: none;
+}

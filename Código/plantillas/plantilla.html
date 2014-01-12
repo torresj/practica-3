@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="es">
+    <head>
+       <meta charset="UTF-8">
+       <title>Cafe</title>
+       <link rel = "stylesheet" type = "text/css" href = "/static/CSS/plantilla.css" />
+       <meta name="author" content="Jaime Torres Benavente">
+       <meta name="description" content="Ejercicio 2 de la practica 3 de D.A.I.">
+
+           <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script language="javascript" type="text/javascript">
+
+    function clearText(field)
+    {
+        if (field.defaultValue == field.value) field.value = '';
+        else if (field.value == '') field.value = field.defaultValue;
+    }
+    </script>
+
+    % if (modo=="gestion" and user=="jaime") and tabla!=0:
+
+        <script language="javascript" type="text/javascript">
+
+        google.load('visualization', '1', {packages:['table']});
+        google.load('visualization', '1.0', {'packages':['controls']});
+
+        google.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Meses');
+            data.addColumn('number', 'Ingresos');
+            data.addColumn('number', 'Gastos');
+            data.addColumn('number', 'Balance');
+            data.addRows([
+              ['Enero',  {f: '${tabla['enero']['ingresos']}€'},{f: '${tabla['enero']['gastos']}€'},{f: '${tabla['enero']['ingresos']-tabla['enero']['gastos']}€'}],
+              ['Febrero',  {f: '${tabla['febrero']['ingresos']}€'},{f: '${tabla['febrero']['gastos']}€'},{f: '${tabla['febrero']['ingresos']-tabla['febrero']['gastos']}€'}],
+              ['Marzo',  {f: '${tabla['marzo']['ingresos']}€'},{f: '${tabla['marzo']['gastos']}€'},{f: '${tabla['marzo']['ingresos']-tabla['marzo']['gastos']}€'}],
+              ['Abril',  {f: '${tabla['abril']['ingresos']}€'},{f: '${tabla['abril']['gastos']}€'},{f: '${tabla['abril']['ingresos']-tabla['abril']['gastos']}€'}],
+              ['Mayo',  {f: '${tabla['mayo']['ingresos']}€'},{f: '${tabla['mayo']['gastos']}€'},{f: '${tabla['mayo']['ingresos']-tabla['mayo']['gastos']}€'}],
+              ['Junio',  {f: '${tabla['junio']['ingresos']}€'},{f: '${tabla['junio']['gastos']}€'},{f: '${tabla['junio']['ingresos']-tabla['junio']['gastos']}€'}],
+              ['Julio',  {f: '${tabla['julio']['ingresos']}€'},{f: '${tabla['julio']['gastos']}€'},{f: '${tabla['julio']['ingresos']-tabla['julio']['gastos']}€'}],
+              ['Agosto',  {f: '${tabla['agosto']['ingresos']}€'},{f: '${tabla['agosto']['gastos']}€'},{f: '${tabla['agosto']['ingresos']-tabla['agosto']['gastos']}€'}],
+              ['Septiembre',  {f: '${tabla['septiembre']['ingresos']}€'},{f: '${tabla['septiembre']['gastos']}€'},{f: '${tabla['septiembre']['ingresos']-tabla['septiembre']['gastos']}€'}],
+              ['Octubre',  {f: '${tabla['octubre']['ingresos']}€'},{f: '${tabla['octubre']['gastos']}€'},{f: '${tabla['octubre']['ingresos']-tabla['octubre']['gastos']}€'}],
+              ['Noviembre',  {f: '${tabla['noviembre']['ingresos']}€'},{f: '${tabla['noviembre']['gastos']}€'},{f: '${tabla['noviembre']['ingresos']-tabla['noviembre']['gastos']}€'}],
+              ['Direccion',  {f: '${tabla['diciembre']['ingresos']}€'},{f: '${tabla['diciembre']['gastos']}€'},{f: '${tabla['diciembre']['ingresos']-tabla['diciembre']['gastos']}€'}]
+            ]);
+
+            var table = new google.visualization.Table(document.getElementById('tabla'));
+            table.draw(data, {showRowNumber: false});
+          }
+
+          function drawPies(){
+
+                    // Create our data table.
+                var data = google.visualization.arrayToDataTable([
+                  ['Name', 'Ingresos'],
+                  ['Enero' , ${tabla['enero']['ingresos']}],
+                  ['Febrero', ${tabla['febrero']['ingresos']}],
+                  ['Marzo', ${tabla['marzo']['ingresos']}],
+                  ['Abril', ${tabla['abril']['ingresos']}],
+                  ['Mayo', ${tabla['mayo']['ingresos']}],
+                  ['Junio', ${tabla['junio']['ingresos']}],
+                  ['Julio', ${tabla['julio']['ingresos']}],
+                  ['Agosto', ${tabla['agosto']['ingresos']}],
+                  ['Septiembre', ${tabla['septiembre']['ingresos']}],
+                  ['Octubre', ${tabla['octubre']['ingresos']}],
+                  ['Noviembre', ${tabla['noviembre']['ingresos']}],
+                  ['Diciembre', ${tabla['diciembre']['ingresos']}]
+                ]);
+
+                var data2 = google.visualization.arrayToDataTable([
+                  ['Name', 'Gastos'],
+                  ['Enero' , ${tabla['enero']['gastos']}],
+                  ['Febrero', ${tabla['febrero']['gastos']}],
+                  ['Marzo', ${tabla['marzo']['gastos']}],
+                  ['Abril', ${tabla['abril']['gastos']}],
+                  ['Mayo', ${tabla['mayo']['gastos']}],
+                  ['Junio', ${tabla['junio']['gastos']}],
+                  ['Julio', ${tabla['julio']['gastos']}],
+                  ['Agosto', ${tabla['agosto']['gastos']}],
+                  ['Septiembre', ${tabla['septiembre']['gastos']}],
+                  ['Octubre', ${tabla['octubre']['gastos']}],
+                  ['Noviembre', ${tabla['noviembre']['gastos']}],
+                  ['Diciembre', ${tabla['diciembre']['gastos']}]
+                ]);
+
+                // Create a dashboard.
+                var dashboard = new google.visualization.Dashboard(
+                    document.getElementById('dashboard_pie'));
+
+                var dashboard2 = new google.visualization.Dashboard(
+                    document.getElementById('dashboard_pie2'));
+
+                
+
+                document.getElementById('dashboard_pie').style.display="inline";
+                document.getElementById('dashboard_pie2').style.display="inline";
+                document.getElementById('bars').style.display="none";
+                document.getElementById('column').style.display="none";
+                document.getElementById('line').style.display="none";
+
+
+                // Create a range slider, passing some options
+                var slider = new google.visualization.ControlWrapper({
+                  'controlType': 'NumberRangeFilter',
+                  'containerId': 'filter_pie',
+                  'options': {
+                    'filterColumnLabel': 'Ingresos'
+                  }
+                });
+
+                var slider2 = new google.visualization.ControlWrapper({
+                  'controlType': 'NumberRangeFilter',
+                  'containerId': 'filter_pie2',
+                  'options': {
+                    'filterColumnLabel': 'Gastos'
+                  }
+                });
+
+                // Create a pie chart, passing some options
+                var pieChart = new google.visualization.ChartWrapper({
+                  'chartType': 'PieChart',
+                  'containerId': 'chart_pie',
+                  'options': {
+                    'title':'Ingresos',
+                    'width': 600,
+                    'height': 300,
+                    'pieSliceText': 'value',
+                    'legend': 'right',
+                    'is3D': true
+                  }
+                });
+
+                var pieChart2 = new google.visualization.ChartWrapper({
+                  'chartType': 'PieChart',
+                  'containerId': 'chart_pie2',
+                  'options': {
+                    'title':'Gastos',
+                    'width': 600,
+                    'height': 300,
+                    'pieSliceText': 'value',
+                    'legend': 'right',
+                    'is3D': true
+                  }
+                });
+
+                // Establish dependencies, declaring that 'filter' drives 'pieChart',
+                // so that the pie chart will only display entries that are let through
+                // given the chosen slider range.
+                dashboard.bind(slider, pieChart);
+                dashboard2.bind(slider2, pieChart2);
+
+                // Draw the dashboard.
+                dashboard.draw(data);
+                dashboard2.draw(data2);
+          }
+
+
+          function drawBars(){
+
+                    // Create our data table.
+                var data = google.visualization.arrayToDataTable([
+                  ['Mes', 'Ingresos', 'Gastos','Balance'],
+                  ['Enero' , ${tabla['enero']['ingresos']},${tabla['enero']['gastos']},${tabla['enero']['ingresos']-tabla['enero']['gastos']}],
+                  ['Febrero', ${tabla['febrero']['ingresos']},${tabla['febrero']['gastos']},${tabla['febrero']['ingresos']-tabla['febrero']['gastos']}],
+                  ['Marzo', ${tabla['marzo']['ingresos']},${tabla['marzo']['gastos']},${tabla['marzo']['ingresos']-tabla['marzo']['gastos']}],
+                  ['Abril', ${tabla['abril']['ingresos']},${tabla['abril']['gastos']},${tabla['abril']['ingresos']-tabla['abril']['gastos']}],
+                  ['Mayo', ${tabla['mayo']['ingresos']},${tabla['mayo']['gastos']},${tabla['mayo']['ingresos']-tabla['mayo']['gastos']}],
+                  ['Junio', ${tabla['junio']['ingresos']},${tabla['junio']['gastos']},${tabla['junio']['ingresos']-tabla['junio']['gastos']}],
+                  ['Julio', ${tabla['julio']['ingresos']},${tabla['julio']['gastos']},${tabla['julio']['ingresos']-tabla['julio']['gastos']}],
+                  ['Agosto', ${tabla['agosto']['ingresos']},${tabla['agosto']['gastos']},${tabla['agosto']['ingresos']-tabla['agosto']['gastos']}],
+                  ['Septiembre', ${tabla['septiembre']['ingresos']},${tabla['septiembre']['gastos']},${tabla['septiembre']['ingresos']-tabla['septiembre']['gastos']}],
+                  ['Octubre', ${tabla['octubre']['ingresos']},${tabla['octubre']['gastos']},${tabla['octubre']['ingresos']-tabla['octubre']['gastos']}],
+                  ['Noviembre', ${tabla['noviembre']['ingresos']},${tabla['noviembre']['gastos']},${tabla['noviembre']['ingresos']-tabla['noviembre']['gastos']}],
+                  ['Diciembre', ${tabla['diciembre']['ingresos']},${tabla['diciembre']['gastos']},${tabla['diciembre']['ingresos']-tabla['diciembre']['gastos']}]
+                ]);
+                
+                document.getElementById('dashboard_pie').style.display="none";
+                document.getElementById('dashboard_pie2').style.display="none";
+                document.getElementById('bars').style.display="inline";
+                document.getElementById('column').style.display="none";
+                document.getElementById('line').style.display="none";
+
+                // Create and draw the visualization.
+                new google.visualization.BarChart(document.getElementById('bars')).draw(data,{
+                    title:"Ingresos, Gastos y Balance del año ${tabla['anio']}",
+                    width:600, height:300,
+                    vAxis: {title: "Meses"},
+                    hAxis: {title: "Cantidad"}}
+                );
+          }
+
+          function drawColumn(){
+                    // Create our data table.
+                var data = google.visualization.arrayToDataTable([
+                  ['Mes', 'Ingresos', 'Gastos','Balance'],
+                  ['Enero' , ${tabla['enero']['ingresos']},${tabla['enero']['gastos']},${tabla['enero']['ingresos']-tabla['enero']['gastos']}],
+                  ['Febrero', ${tabla['febrero']['ingresos']},${tabla['febrero']['gastos']},${tabla['febrero']['ingresos']-tabla['febrero']['gastos']}],
+                  ['Marzo', ${tabla['marzo']['ingresos']},${tabla['marzo']['gastos']},${tabla['marzo']['ingresos']-tabla['marzo']['gastos']}],
+                  ['Abril', ${tabla['abril']['ingresos']},${tabla['abril']['gastos']},${tabla['abril']['ingresos']-tabla['abril']['gastos']}],
+                  ['Mayo', ${tabla['mayo']['ingresos']},${tabla['mayo']['gastos']},${tabla['mayo']['ingresos']-tabla['mayo']['gastos']}],
+                  ['Junio', ${tabla['junio']['ingresos']},${tabla['junio']['gastos']},${tabla['junio']['ingresos']-tabla['junio']['gastos']}],
+                  ['Julio', ${tabla['julio']['ingresos']},${tabla['julio']['gastos']},${tabla['julio']['ingresos']-tabla['julio']['gastos']}],
+                  ['Agosto', ${tabla['agosto']['ingresos']},${tabla['agosto']['gastos']},${tabla['agosto']['ingresos']-tabla['agosto']['gastos']}],
+                  ['Septiembre', ${tabla['septiembre']['ingresos']},${tabla['septiembre']['gastos']},${tabla['septiembre']['ingresos']-tabla['septiembre']['gastos']}],
+                  ['Octubre', ${tabla['octubre']['ingresos']},${tabla['octubre']['gastos']},${tabla['octubre']['ingresos']-tabla['octubre']['gastos']}],
+                  ['Noviembre', ${tabla['noviembre']['ingresos']},${tabla['noviembre']['gastos']},${tabla['noviembre']['ingresos']-tabla['noviembre']['gastos']}],
+                  ['Diciembre', ${tabla['diciembre']['ingresos']},${tabla['diciembre']['gastos']},${tabla['diciembre']['ingresos']-tabla['diciembre']['gastos']}]
+                ]);
+                
+                document.getElementById('dashboard_pie').style.display="none";
+                document.getElementById('dashboard_pie2').style.display="none";
+                document.getElementById('bars').style.display="none";
+                document.getElementById('column').style.display="inline";
+                document.getElementById('line').style.display="none";
+
+                                // Create and draw the visualization.
+                new google.visualization.ColumnChart(document.getElementById('column')).
+                draw(data,
+                    {title:"Ingresos, Gastos y Balance del año ${tabla['anio']}",
+                    width:600, height:300,
+                    hAxis: {title: "Meses"}}
+                );
+
+            }
+            
+            function drawLine(){
+                var data = google.visualization.arrayToDataTable([
+                  ['Mes', 'Ingresos', 'Gastos','Balance'],
+                  ['Enero' , ${tabla['enero']['ingresos']},${tabla['enero']['gastos']},${tabla['enero']['ingresos']-tabla['enero']['gastos']}],
+                  ['Febrero', ${tabla['febrero']['ingresos']},${tabla['febrero']['gastos']},${tabla['febrero']['ingresos']-tabla['febrero']['gastos']}],
+                  ['Marzo', ${tabla['marzo']['ingresos']},${tabla['marzo']['gastos']},${tabla['marzo']['ingresos']-tabla['marzo']['gastos']}],
+                  ['Abril', ${tabla['abril']['ingresos']},${tabla['abril']['gastos']},${tabla['abril']['ingresos']-tabla['abril']['gastos']}],
+                  ['Mayo', ${tabla['mayo']['ingresos']},${tabla['mayo']['gastos']},${tabla['mayo']['ingresos']-tabla['mayo']['gastos']}],
+                  ['Junio', ${tabla['junio']['ingresos']},${tabla['junio']['gastos']},${tabla['junio']['ingresos']-tabla['junio']['gastos']}],
+                  ['Julio', ${tabla['julio']['ingresos']},${tabla['julio']['gastos']},${tabla['julio']['ingresos']-tabla['julio']['gastos']}],
+                  ['Agosto', ${tabla['agosto']['ingresos']},${tabla['agosto']['gastos']},${tabla['agosto']['ingresos']-tabla['agosto']['gastos']}],
+                  ['Septiembre', ${tabla['septiembre']['ingresos']},${tabla['septiembre']['gastos']},${tabla['septiembre']['ingresos']-tabla['septiembre']['gastos']}],
+                  ['Octubre', ${tabla['octubre']['ingresos']},${tabla['octubre']['gastos']},${tabla['octubre']['ingresos']-tabla['octubre']['gastos']}],
+                  ['Noviembre', ${tabla['noviembre']['ingresos']},${tabla['noviembre']['gastos']},${tabla['noviembre']['ingresos']-tabla['noviembre']['gastos']}],
+                  ['Diciembre', ${tabla['diciembre']['ingresos']},${tabla['diciembre']['gastos']},${tabla['diciembre']['ingresos']-tabla['diciembre']['gastos']}]
+                ]);
+                
+                document.getElementById('dashboard_pie').style.display="none";
+                document.getElementById('dashboard_pie2').style.display="none";
+                document.getElementById('bars').style.display="none";
+                document.getElementById('column').style.display="none";
+                document.getElementById('line').style.display="inline";
+
+
+                new google.visualization.LineChart(document.getElementById('line')).
+                draw(data,
+                    {title:"Ingresos, Gastos y Balance del año ${tabla['anio']}",
+                    width:600, height:300,
+                    hAxis: {title: "Meses"}}
+                );
+            }
+        </script>
+
+    % elif modo=="contacto":
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBqHbXLbyRokPz898j8jnkNIE8k7r-O9-k&sensor=false">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(37.181488, -3.600609),
+          zoom: 12,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: map.getCenter(),
+            map: map,
+            title: 'Cafe del mar'
+        });
+
+        % for x in range(0,len(tweet)):
+            var marca${x} = new google.maps.Marker({
+            position: new google.maps.LatLng(${tweet[x][1][0]},${tweet[x][1][1]}),
+            map: map,
+            title: '${tweet[x][0]}'
+          });
+
+        % endfor
+
+
+        google.maps.event.addListener(map, 'center_changed', function() {
+            // 3 seconds after the center of the map has changed, pan back to the
+            // marker.
+        window.setTimeout(function() {
+            map.panTo(marker.getPosition());
+        }, 6000);
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+        map.setZoom(18);
+        map.setCenter(marker.getPosition());
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+
+    % else:
+        <script></script>
+
+    % endif
+
+
+    </head>
+    <body>
+    <div id="boton_twiter">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="es" data-size="large">Twittear</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+    <div id="templatemo_wrapper">
+	
+    <div id="templatemo_header">
+		<div id="site_title"><h1>${titulo}</h1></div>
+        
+        <div id="templatemo_menu">
+            <ul>
+                % if modo=="index":
+                    <li><a href="/cafe" class="current">Home</a></li>
+                    <li><a href="/cafe/form">Registrar</a></li>
+                    <li><a href="/cafe/gestion">Gestion</a></li>
+                    <li><a href="/cafe/contacto">Contacto</a></li>
+                % elif modo=="form":
+                    <li><a href="/cafe">Home</a></li>
+                    <li><a href="/cafe/form" class="current">Registrar</a></li>
+                    <li><a href="/cafe/gestion">Gestion</a></li>
+                    <li><a href="/cafe/contacto">Contacto</a></li>
+                % elif modo=="contacto":
+                    <li><a href="/cafe">Home</a></li>
+                    <li><a href="/cafe/form">Registrar</a></li>
+                    <li><a href="/cafe/gestion">Gestion</a></li>
+                    <li><a href="/cafe/contacto" class="current">Contact</a></li>
+                % else:
+                    <li><a href="/cafe">Home</a></li>
+                    <li><a href="/cafe/form">Registrar</a></li>
+                    <li><a href="/cafe/gestion" class="current">Gestion</a></li>
+                    <li><a href="/cafe/contacto">Contacto</a></li>
+                % endif
+            </ul>    	
+        </div> <!-- end of templatemo_menu -->
+	</div> <!-- end of header -->
+    
+    <div id="templatemo_middle">
+        % if modo!="form":   
+        	<div id="middle_box">
+                % if log==False:
+                    <form method="POST">
+                    ${login.render()}
+                    </form>
+                    <a id="regis" href="/cafe/form">Registrarse</a>
+                     % if error!='':
+                        <p id="error">${error}</p>
+                    % endif
+                % else:
+                    <p id="saludo">Bienvenid@ <em>${user}</em> <a id="cerrar" href="/cafe/cerrarsesion"><img src="/static/images/cerrar.png" alt"cerrar sesion"/></a><p>
+                % endif
+            </div>
+        % endif	
+    </div> <!-- end of middle -->
+    
+    <div id="tmeplatemo_main">
+    	<div id="templatemo_sidebar">
+        	
+            <h3>${subtitulo1}</h3>
+        	<div class="templatemo_sb_box">
+            	<span class="top"></span><span class="bottom"></span>
+        		
+        		% for x in cafes: 
+                    <div class="news_box"><span class="nb_top"></span><span class="nb_bottom"></span>
+            			<h6><a href="/cafe/${x[0]}">${x[0]}</a></h6>
+						${x[1]}
+					</div>
+                % endfor
+            
+            	<div class="cleaner"></div>
+            </div>
+            
+            <h3>RSS<img id="RSSimg" src="/static/images/rss.jpg" height="20" width="20" /></h3>
+            <div class="templatemo_sb_box" id="RSS">
+                <span class="top"></span><span class="bottom"></span>
+                <h6><a href="${rss.feed.image.link}"><img src="${rss.feed.image.url}" width="265" /></a>${rss.feed.title}</h6>
+
+                <%
+                    if len(rss['entries'])>5:
+                        entradas=5
+                    else:
+                        entradas=len(rss['entries'])
+
+                %>
+
+                % for x in range(0,entradas): 
+                    <div class="news_box"><span class="nb_top"></span><span class="nb_bottom"></span>
+                        <a href="${rss.entries[x].link}">${rss.entries[x].title}</a>
+                    </div>
+                % endfor
+
+                <div class="cleaner"></div>
+            </div>
+
+            <div id="promotion">
+            	<a href="#">
+            	<span>${cafeEspecial[0]}</span>
+            	${cafeEspecial[1]}
+                </a>
+            </div>
+            
+            <div class="cleaner"></div>
+        </div> <!-- end of sidebar -->
+        
+        <div id="templatemo_content">
+        	<div class="content_box">
+            
+            	<h2>${subtitulo2}</h2>
+
+                % if modo=="index":
+                    <p>${cuerpo}</p>
+                % elif modo=="contacto":
+                    <div id="map_canvas" style="width:600px; height:400px"></div>
+                % elif modo=="gestion":
+                    % if log==True and actualizar==False:
+                        <table id="datos">
+                           <tr>
+                                <td><em>Usuario:</em> ${user}</td>     
+                            </tr>
+                            <tr>
+                                <td><em>Nombre:</em> ${nombre}</td>    
+                            </tr>
+                            <tr>
+                                <td><em>Apellidos:</em> ${apell}</td>     
+                            </tr>
+                            <tr>
+                                <td><em>Direccion:</em> ${direc} </td>       
+                            </tr>
+                            <tr>
+                                <td><em>Email:</em> ${email}</td>        
+                            </tr>
+                            <tr>
+                                <td><em>Fecha de Nacimiento:</em> ${dia}/${mes}/${anio}</td>       
+                            </tr>
+                            <tr>
+                                <td id="botones"><a id="boton_act" href="/cafe/gestion_actualizar">Modificar</a></td> 
+                                <td id="botones2"><a id="boton_bor" href="/cafe/gestion_borrar">Borrar Usuario</a></td>      
+                            </tr>
+                        </table>
+                        
+                    % elif log==True and actualizar==True:
+                        <form method="POST">
+                            ${registro.render()}
+                        </form>
+                    % else:
+                        <p style="color:#DF0101;font-size:1.5em;">${cuerpo}</p>
+                    % endif
+
+                % else:
+                    % if reg==False:
+                        <form method="POST">
+                            ${registro.render()}
+                        </form>
+                    %else:
+                        <p id="registrado">${cuerpo}</p>
+                    %endif
+                % endif
+
+                <div class="cleaner"></div>
+            </div>
+
+            % if modo=="gestion" and user=="jaime":
+                <div class="content_box">
+            
+                    <h2>Contabilidad</h2>                 
+
+                    <form id="selecAnio" method="post">
+                        <fieldset>
+                        <legend>Selecciona el a&ntilde;o</legend>
+                        <select id="rango" name="rango">
+                            % for x in range(2013,2010,-1):
+                                % if tabla!=0 and tabla['anio']==str(x):
+                                    <option value="${x}" selected>${x}</option>
+                                % else:
+                                    <option value="${x}">${x}</option>
+                                % endif
+                            % endfor
+                        </select>
+                        <input type="submit" value="Mostrar"/>
+                        </fieldset>
+                    </form>
+
+                    % if tabla!=0:
+
+                        <form id="ingresarDato" method="POST">
+                            <fieldset>
+                            <legend>Formulario para los Ingresos/Gastos</legend>
+                            <label for="meses">Selecciona el mes</label>
+                            <select id="meses" name="meses">
+                                <option value="enero">Enero</option>
+                                <option value="febrero">Febrero</option>
+                                <option value="marzo">Marzo</option>
+                                <option value="abril">Abril</option>
+                                <option value="mayo">Mayo</option>
+                                <option value="junio">Junio</option>
+                                <option value="julio">Julio</option>
+                                <option value="agosto">Agosto</option>
+                                <option value="septiembre">Septiembre</option>
+                                <option value="octubre">Octubre</option>
+                                <option value="noviembre">Noviembre</option>
+                                <option value="diciembre">Diciembre</option>
+                             </select>
+                            
+                            <select id="tipo" name="tipo">
+                                <option value="ingreso">Ingreso</option>
+                                <option value="gasto">Gasto</option>
+                             </select>
+                             <input type"text" id="cantidad" name="cantidad" height="100"/ placeholder="Cantidad en &euro;">
+                             <input type="hidden" id="oculto" name="oculto" value="${tabla['anio']}"/>
+                             <input type="submit" value="A&ntilde;adir"/>
+                            </fieldset>
+                        </form>
+
+                    % endif
+
+                    <div class="cleaner"></div>
+
+                    <div id="tabla">
+                    </div>
+
+                    % if tabla!=0:
+                    <fieldset>
+                            <legend>Tipo de Gr&aacute;fico</legend>
+                            <button id="boton_pie" type="button" onclick="drawPies()">Pie Chart</button>
+                            <button id="boton_bar" type="button" onclick="drawBars()">Bar Chart</button>
+                            <button id="boton_column" type="button" onclick="drawColumn()">Column Chart</button>
+                            <button id="boton_column" type="button" onclick="drawLine()">line Chart</button>
+
+                    </fieldset>
+
+                    % endif
+
+                    <div id="dashboard_pie" class="chart" style="display:none;">
+                      <!--Divs that will hold each control and chart-->
+                      <div id="filter_pie"></div>
+                      <div id="chart_pie"></div>
+                    </div>
+
+                    <div id="dashboard_pie2" class="chart" style="display:none;">
+                      <!--Divs that will hold each control and chart-->
+                      <div id="filter_pie2"></div>
+                      <div id="chart_pie2"></div>
+                    </div>
+
+                    <div id="bars" class="chart" style="display:none;">
+
+                    </div>
+
+                    <div id="column" class="chart" style="display:none;">
+
+                    </div> 
+
+                    <div id="line" class="chart" style="display:none;">
+
+                    </div> 
+
+                </div>
+
+            % endif
+                <div class="cleaner"></div>
+            % if servicios!=[]:
+                <div class="content_box">
+               	  <h2>${subtitulo3}</h2>
+                	<img class="image_wrapper image_fr" src="/static/images/tempaltemo_image_04.jpg" alt="Image" />
+                	<p><em>${subtitulo4}</p>
+                    <ul class="tmo_list">
+                    
+                    % for x in servicios:
+                    	<li><a href="#">${x}</a></li>
+                    % endfor
+
+                    </ul>
+                    
+                    <div class="cleaner h20"></div>
+                    <div class="cleaner"></div>
+                </div>
+            % endif
+            <div class="content_box_last">
+            	<h2>Galeria de imagenes</h2>
+                <ul class="gallery">
+                	<li><a href="#"><img src="/static/images/templatemo_image_01.jpg" alt="Image 1" />${cafes[0][0]}</a></li>
+                    <li><a href="#"><img src="/static/images/templatemo_image_03.jpg" alt="Image 3" />${cafes[1][0]}</a></li>                    
+                    <li><a href="#"><img src="/static/images/templatemo_image_02.jpg" alt="Image 2" />${cafes[2][0]}</a></li>
+                </ul>
+            </div>
+        </div>
+        
+		<div class="cleaner"></div>
+    </div> <!-- end of main -->
+    
+    <div id="templatemo_footer">
+   		${piepagina} 
+    </div> <!-- end of templatemo_footer -->
+
+</div> <!-- end of wrapper -->
+</body>
+</html>
