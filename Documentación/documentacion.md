@@ -183,7 +183,9 @@ respuesta devería ser mas rapida al estar en el mismo equipo y no tener retardo
 ni por el propio servicio de azure.
 
 En cuanto a la aplicación, no comento nada ya que tampoco es objetivo de esta practica, 
-aunque ambas maquinas estan ejecutandose y pueden ser probadas por cualquier persona en:
+aunque ambas maquinas estan ejecutandose y pueden ser probadas por cualquier persona en
+los siguientes enlaces usando como usuario:jaime y como password:1234567 para poder comprobar
+la funcionalidad de la pagina de gestion (mostrando tablas y graficos de google chars):
 
 * [centOS](http://iv-centos.cloudapp.net:8080/cafe)
 
